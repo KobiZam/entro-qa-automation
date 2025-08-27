@@ -1,2 +1,37 @@
-name: CI
-on: [push]
+name: Playwright CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -U pip
+          pip install -e .
+          playwright install chromium --with-deps
+      - name: Run tests
+        env:
+          BASE_URL: https://qa.entro.security/
+          EMAIL: ${{ secrets.ENTRO_EMAIL }}
+          PASSWORD: ${{ secrets.ENTRO_PASSWORD }}
+          HEADLESS: '1'
+        run: |
+          source .venv/bin/activate
+          pytest -n auto --maxfail=1
+      - name: Upload artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: .test-results

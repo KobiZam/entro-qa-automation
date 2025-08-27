@@ -1,2 +1,8 @@
+from playwright.sync_api import Page, expect
+
 class DashboardPage:
-    pass
+    def __init__(self, page: Page):
+        self.page = page
+
+    def assert_loaded(self):
+        expect(self.page.get_by_role("heading", name="Dashboard", exact=False)).to_be_visible()
