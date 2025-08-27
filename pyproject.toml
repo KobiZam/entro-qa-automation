@@ -1,0 +1,14 @@
+[project]
+name = "entro-qa-automation"
+version = "0.1.0"
+description = "Production‑grade Playwright + Pytest automation for Entro Security console"
+requires-python = ">=3.10"
+dependencies = [
+  "pytest>=8.3",
+  "pytest-xdist>=3.6",
+  "pytest-playwright>=0.6.2",
+  "python-dotenv>=1.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q --maxfail=1 --disable-warnings"
