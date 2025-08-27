@@ -1,0 +1,2 @@
+class ExposedInventoryPage:
+    pass

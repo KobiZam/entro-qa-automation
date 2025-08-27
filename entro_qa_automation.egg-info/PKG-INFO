@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: entro-qa-automation
+Version: 0.1.0
+Summary: Production‑grade Playwright + Pytest automation for Entro Security console
+Requires-Python: >=3.10
+Requires-Dist: pytest>=8.3
+Requires-Dist: pytest-xdist>=3.6
+Requires-Dist: pytest-playwright>=0.6.2
+Requires-Dist: python-dotenv>=1.0
